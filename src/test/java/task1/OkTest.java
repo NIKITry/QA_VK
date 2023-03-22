@@ -1,3 +1,5 @@
+package task1;
+
 import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.Test;
 
