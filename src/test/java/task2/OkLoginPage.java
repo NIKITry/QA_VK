@@ -16,12 +16,12 @@ public class OkLoginPage {
         return password;
     }
 
-    public OkLoginPage logIn() {
+    public OkProfilePage logIn() {
         if (email.getValue().isEmpty() || password.getValue().isEmpty()) {
             throw new IllegalArgumentException("fill the email or password");
         }
         btLogin.click();
-        return this;
+        return new OkProfilePage();
     }
 
 }
