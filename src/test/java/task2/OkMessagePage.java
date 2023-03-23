@@ -42,7 +42,7 @@ public class OkMessagePage {
     }
 
     public OkMessagePage writeAndSendMessage(String message) {
-        containerForInputText.setValue("message");
+        containerForInputText.setValue(message);
         buttonSendMessage.click();
         return this;
     }

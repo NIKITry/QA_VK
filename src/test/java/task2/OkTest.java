@@ -11,13 +11,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class OkTest {
     private static final String url = "https://ok.ru";
+    private final String TEST_MESSAGE = "message";
+    private static final SelenideElement ROOT_ELEMENT_TOOLBAR = $x(".//*[@data-l='t,navigationToolbar']");
+
+    private final String PROFILE_TEXT = "botS23AT3 botS23AT3";
+
     private static OkLoginPage loginPage;
     private static OkProfilePage profile;
     private static OkMessagePage messagePage;
+    private static ToolbarItemWrapper toolbar;
     private static Bot bot;
-    private final String TEST_MESSAGE = "message";
-    private final String PROFILE_TEXT = "botS23AT3 botS23AT3";
-    private static final SelenideElement ROOT_ELEMENT_TOOLBAR = $x(".//*[@data-l='t,navigationToolbar']");
+
 
     @BeforeAll
     public static void setUp() {
@@ -40,13 +44,14 @@ public class OkTest {
         assertTrue(profile.getProfileNameButton()
                 .shouldHave(text(PROFILE_TEXT))
                 .exists()); // exists works strangely, ask teacher
+        toolbar = new ToolbarItemWrapper(ROOT_ELEMENT_TOOLBAR); // toolbar appear when we sign in
     }
 
     @Test
     @Order(2)
     @DisplayName("Test: going to messages and write one")
     public void userCanWriteMessage() {
-        messagePage = profile.goToMessages();
+        messagePage = toolbar.goToMessages();
         messagePage.selectChat()
                 .getTextUserMessage()
                 .shouldBe(hidden);
@@ -66,17 +71,19 @@ public class OkTest {
                 .shouldHave(text("В этом чате нет новых сообщений."));
     }
 
-
+    @Test
+    @Order(4)
+    @DisplayName("Test: existing toolbar components")
+    public void toolbarElementsExisting() {
+        assertTrue(toolbar.getProfileIcon()
+                .exists());
+        assertTrue(toolbar.getMsgButton()
+                .exists());
+    }
 
     @AfterAll
     static void exitFromAccount() {
-        ToolbarItemWrapper toolbar = new ToolbarItemWrapper(ROOT_ELEMENT_TOOLBAR);
         toolbar.clickOnProfile()
                 .exitFromAccount(); // не уверен, что это хороший пример пользования декоратором
     }
-
-
-
-
-
 }
