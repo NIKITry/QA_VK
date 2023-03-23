@@ -1,18 +1,25 @@
 package task2;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.*;
+import task2.matchers.CustomMatcher;
 
 
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.open;
+
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.StringContains.containsString;
+import static org.hamcrest.number.OrderingComparison.lessThanOrEqualTo;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class OkTest {
     private static final String url = "https://ok.ru";
     private final String TEST_MESSAGE = "message";
     private static final SelenideElement ROOT_ELEMENT_TOOLBAR = $x(".//*[@data-l='t,navigationToolbar']");
+
+    private static final ElementsCollection NAV_SIDE_ELEMENTS = $$x(".//div/div[contains(@class,'nav-side')]");
 
     private final String PROFILE_TEXT = "botS23AT3 botS23AT3";
 
@@ -45,6 +52,9 @@ public class OkTest {
                 .shouldHave(text(PROFILE_TEXT))
                 .exists()); // exists works strangely, ask teacher
         toolbar = new ToolbarItemWrapper(ROOT_ELEMENT_TOOLBAR); // toolbar appear when we sign in
+        Integer numOfNavSideElem = Math.toIntExact(NAV_SIDE_ELEMENTS.stream().count()); // Matcher
+        assertThat(numOfNavSideElem, lessThanOrEqualTo(7)); //Matcher
+        assertThat(numOfNavSideElem, CustomMatcher.isReasonableNum());
     }
 
     @Test
@@ -59,6 +69,8 @@ public class OkTest {
                 .getTextUserMessage()
                 .hover()
                 .shouldHave(text(TEST_MESSAGE));
+        String textMessage = messagePage.getTextUserMessage().text();
+        assertThat(textMessage, containsString("message"));
     }
 
     @Test
