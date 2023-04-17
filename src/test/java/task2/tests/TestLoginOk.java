@@ -39,7 +39,7 @@ public class TestLoginOk extends BaseTest {
 
 
     @AfterAll
-    @DisplayName("Test: existing toolbar components")
+    @DisplayName("exit from account")
     public static void signOut() {
         toolbar.getProfileIcon().shouldBe(visible);
         toolbar.clickOnProfile()

@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Selenide.$x;
 public class OkMessagePage implements BasePage {
     private final SelenideElement containerForInputText = $(By.xpath(".//div[contains(@data-tsid,'write_msg_input')]"));
     private final SelenideElement buttonSendMessage = $(By.xpath(".//div/*[@data-tsid='button_send']"));
-    private final SelenideElement textUserMessage = $(By.xpath(".//div[@class='wrap']//span[@data-tsid='message_text']"));
+    private final SelenideElement textUserMessage = $(By.xpath(".//div[@class='wrap']//span[@data-tsid='message_text']/span"));
     private final SelenideElement chatElement = $(By.xpath(".//*[@data-tsid='chat' and @data-tsid-id='GROUP_CHAT']/a"));
     private final SelenideElement removeCheckBox = $(By.xpath(".//*[@data-tsid='message_root']/*[@data-l='t,selectMultiple']"));
     private final SelenideElement toolbarRemoveCheckbox = $x(".//*[@class='controls']/*[@data-tsid='control-remove']");
