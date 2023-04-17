@@ -1,8 +1,8 @@
-package task2;
+package task2.bots;
 
 public class Bot {
-    private final String email = "botS23AT3";
-    private final String password = "autotests2023";
+    private static final String email = "botS23AT29";
+    private static final String password = "autotests2023";
 
     public String getEmail() {
         return email;

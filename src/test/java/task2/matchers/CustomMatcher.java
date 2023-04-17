@@ -7,7 +7,7 @@ public class CustomMatcher extends TypeSafeDiagnosingMatcher<Integer> {
 
     @Override
     protected boolean matchesSafely(Integer item, Description mismatchDescription) {
-        return (item.intValue() > 10 && item.intValue() < 100 && item.intValue() != 50);
+        return (item > 3 && item < 100 && item != 50);
     }
 
     @Override
