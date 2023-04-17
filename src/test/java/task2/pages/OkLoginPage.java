@@ -24,7 +24,9 @@ public class OkLoginPage {
         return password;
     }
 
-    public OkProfilePage logIn() {
+    public OkProfilePage logIn(String email, String password) {
+        this.email.setValue(email);
+        this.password.setValue(password);
         btLogin.click();
         return new OkProfilePage();
     }

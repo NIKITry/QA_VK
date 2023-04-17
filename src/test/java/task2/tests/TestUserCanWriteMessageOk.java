@@ -19,7 +19,7 @@ public class TestUserCanWriteMessageOk extends BaseTest {
     public void init() {
         loginPage.getEmail().setValue(bot.getEmail());
         loginPage.getPassword().setValue(bot.getPassword());
-        loginPage.logIn();
+        loginPage.logIn(bot.getEmail(), bot.getPassword());
         toolbar = new ToolbarItemPageElement();
     }
 

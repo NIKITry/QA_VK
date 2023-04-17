@@ -22,22 +22,14 @@ public class TestLoginOk extends BaseTest {
     private static OkProfilePage profile;
     private static ToolbarItemPageElement toolbar;
 
-
-    /*
-    сделать несколько asserts
-    */
-
-
     @Test
     @DisplayName("Test: user can log in OK")
     public void userCanLogIn() {
         assertThat(loginPage.getEmail().getAttribute("id"), equalTo("field_email"));
         assertThat(loginPage.getPassword().getAttribute("id"), equalTo("field_password"));
-        loginPage.getEmail().setValue(bot.getEmail());
-        loginPage.getPassword().setValue(bot.getPassword());
         loginPage.getEmail().shouldHave(name("st.email"));
         loginPage.getPassword().shouldHave(name("st.password"));
-        profile = loginPage.logIn();
+        profile = loginPage.logIn(bot.getEmail(), bot.getPassword());
         toolbar = new ToolbarItemPageElement();
         assertThat(profile.getProfileNameButton().getText(), equalTo("botS23AT29 botS23AT29"));
         Integer numOfNavSideElem = Math.toIntExact(NAV_SIDE_ELEMENTS.size());
